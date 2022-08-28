@@ -7,11 +7,66 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall-ware</name>
     <description>聚合服务</description>
+    <properties>
+        <java.version>11</java.version>
+        <kotlin.version>1.6.21</kotlin.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
     <packaging>pom</packaging>
+   <dependencies>
+       <dependency>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-install-plugin</artifactId>
+           <version>2.4</version>
+           <type>maven-plugin</type>
+       </dependency>
+
+       <dependency>
+           <groupId>org.apache.maven.plugins</groupId>
+           <artifactId>maven-deploy-plugin</artifactId>
+           <version>2.7</version>
+           <type>maven-plugin</type>
+       </dependency>
+
+   </dependencies>
+
     <modules>
         <module>gulimall-product</module>
         <module>gulimall-ware</module>
         <module>gulimall-coupon</module>
         <module>gulimall-member</module>
+        <module>gulimall-common</module>
+        <module>gulimall-order</module>
+        <module>renren-fast</module>
     </modules>
+
+    <build>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>${project.basedir}/src/test/kotlin</testSourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                    <compilerPlugins>
+                        <plugin>spring</plugin>
+                    </compilerPlugins>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

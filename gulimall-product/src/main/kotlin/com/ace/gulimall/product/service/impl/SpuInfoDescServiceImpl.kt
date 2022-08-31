@@ -5,8 +5,6 @@ import com.ace.gulimall.product.entity.SpuInfoDescEntity
 import com.ace.gulimall.product.service.SpuInfoDescService
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
-import com.ace.gulimall.common.utils.PageUtils
-import com.ace.gulimall.common.utils.Query
 import org.springframework.stereotype.Service
 
 @Service("spuInfoDescService")

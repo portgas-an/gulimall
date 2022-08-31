@@ -2,7 +2,6 @@ package com.ace.gulimall.member.controller
 
 import com.ace.gulimall.member.entity.MemberLoginLogEntity
 import com.ace.gulimall.member.service.MemberLoginLogService
-import com.ace.gulimall.common.utils.PageUtils
 import com.ace.gulimall.common.utils.R
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

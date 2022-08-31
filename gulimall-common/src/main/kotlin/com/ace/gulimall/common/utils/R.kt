@@ -14,13 +14,13 @@ import org.apache.http.HttpStatus
  *
  * @author Mark sunlightcs@gmail.com
  */
-class R : HashMap<String?, Object?>() {
+class R : HashMap<String?, Any?>() {
     init {
         put("code", 0)
         put("msg", "success")
     }
 
-    fun put(key: String?, value: Object?): R {
+    override fun put(key: String?, value: Any?): R {
         super.put(key, value)
         return this
     }
@@ -45,7 +45,7 @@ class R : HashMap<String?, Object?>() {
             return r
         }
 
-        fun ok(map: Map<String?, Object?>?): R {
+        fun ok(map: Map<String?, Any?>): R {
             val r = R()
             r.putAll(map)
             return r

@@ -1,7 +1,5 @@
 package com.ace.gulimall.ware.service.impl
 
-import com.ace.gulimall.common.utils.PageUtils
-import com.ace.gulimall.common.utils.Query
 import com.ace.gulimall.ware.dao.PurchaseDetailDao
 import com.ace.gulimall.ware.entity.PurchaseDetailEntity
 import com.ace.gulimall.ware.service.PurchaseDetailService

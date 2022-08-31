@@ -1,7 +1,5 @@
 package com.ace.gulimall.order.service.impl
 
-import com.ace.gulimall.common.utils.PageUtils
-import com.ace.gulimall.common.utils.Query
 import com.ace.gulimall.order.dao.OrderItemDao
 import com.ace.gulimall.order.entity.OrderItemEntity
 import com.ace.gulimall.order.service.OrderItemService

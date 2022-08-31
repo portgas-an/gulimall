@@ -2,7 +2,6 @@ package com.ace.gulimall.member.service
 
 import com.ace.gulimall.member.entity.MemberReceiveAddressEntity
 import com.baomidou.mybatisplus.extension.service.IService
-import com.ace.gulimall.common.utils.PageUtils
 
 /**
  * 会员收货地址

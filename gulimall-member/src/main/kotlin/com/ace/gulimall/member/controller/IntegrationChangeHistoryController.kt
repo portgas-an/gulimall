@@ -1,6 +1,5 @@
 package com.ace.gulimall.member.controller
 
-import com.ace.gulimall.common.utils.PageUtils
 import com.ace.gulimall.common.utils.R
 import com.ace.gulimall.member.entity.IntegrationChangeHistoryEntity
 import com.ace.gulimall.member.service.IntegrationChangeHistoryService

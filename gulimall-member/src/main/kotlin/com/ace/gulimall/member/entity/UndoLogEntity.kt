@@ -18,47 +18,47 @@ class UndoLogEntity : Serializable {
      *
      */
     @TableId
-    private val id: Long? = null
+     var id: Long? = null
 
     /**
      *
      */
-    private val branchId: Long? = null
+     var branchId: Long? = null
 
     /**
      *
      */
-    private val xid: String? = null
+     var xid: String? = null
 
     /**
      *
      */
-    private val context: String? = null
+     var context: String? = null
 
     /**
      *
      */
-    private val rollbackInfo: Byte = 0
+     var rollbackInfo: Byte = 0
 
     /**
      *
      */
-    private val logStatus: Int? = null
+     var logStatus: Int? = null
 
     /**
      *
      */
-    private val logCreated: Date? = null
+     var logCreated: Date? = null
 
     /**
      *
      */
-    private val logModified: Date? = null
+     var logModified: Date? = null
 
     /**
      *
      */
-    private val ext: String? = null
+     var ext: String? = null
 
     companion object {
         private const val serialVersionUID = 1L

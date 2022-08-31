@@ -17,27 +17,27 @@ class MemberCollectSubjectEntity : Serializable {
      * id
      */
     @TableId
-    private val id: Long? = null
+     var id: Long? = null
 
     /**
      * subject_id
      */
-    private val subjectId: Long? = null
+     var subjectId: Long? = null
 
     /**
      * subject_name
      */
-    private val subjectName: String? = null
+     var subjectName: String? = null
 
     /**
      * subject_img
      */
-    private val subjectImg: String? = null
+     var subjectImg: String? = null
 
     /**
      * 活动url
      */
-    private val subjectUrll: String? = null
+     var subjectUrll: String? = null
 
     companion object {
         private const val serialVersionUID = 1L

@@ -21,6 +21,13 @@ class CouponController {
     @Autowired
     private lateinit var couponService: CouponService
 
+    @RequestMapping("/member/list")
+    fun memberCounpons(): R {
+        return R.ok().put("coupons", listOf(CouponEntity().apply {
+            couponName = "满100减50"
+        })) ?: R.error()
+    }
+
     /**
      * 列表
      */

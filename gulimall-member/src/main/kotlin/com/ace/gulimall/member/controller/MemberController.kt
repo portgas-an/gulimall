@@ -2,6 +2,7 @@ package com.ace.gulimall.member.controller
 
 import com.ace.gulimall.common.utils.R
 import com.ace.gulimall.member.entity.MemberEntity
+import com.ace.gulimall.member.feign.CouponFeignService
 import com.ace.gulimall.member.service.MemberService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -19,6 +20,19 @@ import java.util.*
 class MemberController {
     @Autowired
     private lateinit var memberService: MemberService
+
+    @Autowired
+    private lateinit var couponFeignService: CouponFeignService
+
+    @RequestMapping("/coupons")
+    fun coupons(): R {
+        val memberEntity = MemberEntity().apply {
+            nickname = "张三"
+        }
+        val memberCoupons = couponFeignService.memberCoupons()
+        return R.ok().put("member", memberEntity)?.put("coupons", memberCoupons["coupons"]) ?: R.error()
+    }
+
 
     /**
      * 列表

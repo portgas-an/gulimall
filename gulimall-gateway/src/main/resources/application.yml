@@ -1,0 +1,24 @@
+spring:
+  config:
+    import:
+      - optional:nacos:gulimall-gateway.yml?refreshEnabled=true # 开启动态刷新
+  cloud:
+    nacos:
+      config:
+        server-addr: 119.91.202.204:8848
+        namespace: a97fa0e8-6034-4cfc-bf49-e44fe6ad149b
+        group: DEFAULT_GROUP
+    gateway:
+      routes:
+        - id: test_router
+          uri: https://www.baidu.com
+          predicates:
+            - Query=url,baidu
+        - id: qq_route
+          uri: https://wwww.qq.com
+          predicates:
+            - Query=url,qq
+  application:
+    name: gulimall-gateway
+server:
+  port: 77

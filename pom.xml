@@ -5,7 +5,7 @@
     <groupId>com.ace.gulimall</groupId>
     <artifactId>gulimall</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gulimall-ware</name>
+    <name>gulimall-project</name>
     <description>聚合服务</description>
     <properties>
         <java.version>11</java.version>
@@ -36,6 +36,7 @@
     <modules>
         <module>gulimall-product</module>
         <module>gulimall-ware</module>
+        <module>gulimall-gateway</module>
         <module>gulimall-coupon</module>
         <module>gulimall-member</module>
         <module>gulimall-common</module>

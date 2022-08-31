@@ -18,32 +18,32 @@ class IntegrationChangeHistoryEntity : Serializable {
      * id
      */
     @TableId
-    private val id: Long? = null
+     var id: Long? = null
 
     /**
      * member_id
      */
-    private val memberId: Long? = null
+     var memberId: Long? = null
 
     /**
      * create_time
      */
-    private val createTime: Date? = null
+     var createTime: Date? = null
 
     /**
      * 变化的值
      */
-    private val changeCount: Int? = null
+     var changeCount: Int? = null
 
     /**
      * 备注
      */
-    private val note: String? = null
+     var note: String? = null
 
     /**
      * 来源[0->购物；1->管理员修改;2->活动]
      */
-    private val sourceTyoe: Int? = null
+     var sourceTyoe: Int? = null
 
     companion object {
         private const val serialVersionUID = 1L

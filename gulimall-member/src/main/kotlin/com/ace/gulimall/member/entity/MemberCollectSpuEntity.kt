@@ -18,32 +18,32 @@ class MemberCollectSpuEntity : Serializable {
      * id
      */
     @TableId
-    private val id: Long? = null
+     var id: Long? = null
 
     /**
      * 会员id
      */
-    private val memberId: Long? = null
+     var memberId: Long? = null
 
     /**
      * spu_id
      */
-    private val spuId: Long? = null
+     var spuId: Long? = null
 
     /**
      * spu_name
      */
-    private val spuName: String? = null
+     var spuName: String? = null
 
     /**
      * spu_img
      */
-    private val spuImg: String? = null
+     var spuImg: String? = null
 
     /**
      * create_time
      */
-    private val createTime: Date? = null
+     var createTime: Date? = null
 
     companion object {
         private const val serialVersionUID = 1L

@@ -19,6 +19,7 @@
 		<spring-cloud.version>2021.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
+
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-reflect</artifactId>
@@ -39,6 +40,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!-- M1芯片需要的,其他无需-->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-resolver-dns-native-macos</artifactId>
+			<version>4.1.80.Final</version>
+			<classifier>osx-aarch_64</classifier>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.ace.gulimall</groupId>
+			<artifactId>gulimall-common</artifactId>
+			<version>0.0.2</version>
+		</dependency>
+
 	</dependencies>
 	<dependencyManagement>
 		<dependencies>

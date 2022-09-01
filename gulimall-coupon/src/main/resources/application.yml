@@ -12,6 +12,7 @@ spring:
         namespace: 131097a6-ae2a-48a9-b8f8-93e12696355b
       discovery:
         ip: 119.91.202.204:8848
+        server-addr: 119.91.202.204:8848
   config:
     import:
       - optional:nacos:datasource.yml?refreshEnabled=true # 开启动态刷新

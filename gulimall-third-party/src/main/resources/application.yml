@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 119.91.202.204:8848
+        group: dev
+        namespace: 8e2ab651-6f0d-4fb2-80b2-6c74e1e46e7f
+      discovery:
+        ip: 119.91.202.204
+        server-addr: 119.91.202.204:8848
+  config:
+    import:
+      - optional:nacos:oss.yml?group=DEFAULT_GROUP&refreshEnabled=true # 开启动态刷新
+  application:
+    name: gulimall-third-party
+
+server:
+  port: 30000

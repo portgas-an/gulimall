@@ -2,6 +2,8 @@ package com.ace.gulimall.product.service
 
 import com.ace.gulimall.product.entity.CategoryBrandRelationEntity
 import com.baomidou.mybatisplus.extension.service.IService
+import com.ace.gulimall.common.utils.PageUtils
+
 
 /**
  * 品牌分类关联

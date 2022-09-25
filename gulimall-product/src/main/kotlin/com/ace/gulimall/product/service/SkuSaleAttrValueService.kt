@@ -2,6 +2,7 @@ package com.ace.gulimall.product.service
 
 import com.ace.gulimall.product.entity.SkuSaleAttrValueEntity
 import com.baomidou.mybatisplus.extension.service.IService
+import com.ace.gulimall.common.utils.PageUtils
 
 /**
  * sku销售属性&值

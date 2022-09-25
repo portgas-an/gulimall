@@ -1,9 +1,13 @@
 package com.ace.gulimall.product.controller
 
 import com.ace.gulimall.common.utils.R
+import com.ace.gulimall.common.valid.AddGroup
+import com.ace.gulimall.common.valid.UpdateGroup
+import com.ace.gulimall.common.valid.UpdateStatusGroup
 import com.ace.gulimall.product.entity.BrandEntity
 import com.ace.gulimall.product.service.BrandService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -25,8 +29,8 @@ class BrandController {
      */
     @RequestMapping("/list")
     fun list(@RequestParam params: Map<String?, Any?>?): R {
-        val page = brandService!!.queryPage(params)
-        return R.ok().put("page", page) ?: R.error()
+        val page = brandService.queryPage(params)
+        return R.ok().put("page", page)
     }
 
     /**
@@ -42,8 +46,9 @@ class BrandController {
      * 保存
      */
     @RequestMapping("/save")
-    fun save(@RequestBody brand: BrandEntity): R {
-        brandService!!.save(brand)
+    fun save(@Validated(AddGroup::class) @RequestBody brand: BrandEntity): R {
+        brandService.save(brand)
+
         return R.ok()
     }
 
@@ -51,8 +56,17 @@ class BrandController {
      * 修改
      */
     @RequestMapping("/update")
-    fun update(@RequestBody brand: BrandEntity): R {
-        brandService!!.updateById(brand)
+    fun update(@Validated(UpdateGroup::class)@RequestBody brand: BrandEntity): R {
+        brandService.updateById(brand)
+        return R.ok()
+    }
+
+    /**
+     * 修改状态
+     */
+    @RequestMapping("/update/status")
+    fun updateStatus(@Validated(UpdateStatusGroup::class)@RequestBody brand: BrandEntity): R {
+        brandService.updateById(brand)
         return R.ok()
     }
 

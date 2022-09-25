@@ -42,6 +42,7 @@
         <module>gulimall-common</module>
         <module>gulimall-order</module>
         <module>renren-fast</module>
+        <module>gulimall-third-party</module>
     </modules>
 
 </project>

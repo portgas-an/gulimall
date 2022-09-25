@@ -5,7 +5,6 @@ import com.ace.gulimall.product.entity.CategoryEntity
 import com.ace.gulimall.product.service.CategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 /**
  * 商品三级分类
@@ -21,12 +20,12 @@ class CategoryController {
     private lateinit var categoryService: CategoryService
 
     /**
-     * 列表
+     * 查处所有分类以及树形结构,以树形结构组装
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/tree")
     fun list(@RequestParam params: Map<String?, Any?>?): R {
-        val page = categoryService!!.queryPage(params)
-        return R.ok().put("page", page) ?: R.error()
+        val entitys :List<CategoryEntity>? =  categoryService.listWithTree()
+        return R.ok().put("data", entitys)
     }
 
     /**
@@ -34,8 +33,8 @@ class CategoryController {
      */
     @RequestMapping("/info/{catId}")
     fun info(@PathVariable("catId") catId: Long?): R {
-        val category = categoryService!!.getById(catId)
-        return R.ok().put("category", category) ?: R.error()
+        val category = categoryService.getById(catId)
+        return R.ok().put("category", category)
     }
 
     /**
@@ -48,20 +47,24 @@ class CategoryController {
     }
 
     /**
-     * 修改
+     * 更新分类排序
      */
-    @RequestMapping("/update")
-    fun update(@RequestBody category: CategoryEntity): R {
-        categoryService!!.updateById(category)
+    @RequestMapping("/update/sort")
+    fun update(@RequestBody category: Array<CategoryEntity>): R {
+        categoryService.updateBatchById(listOf(*category))
         return R.ok()
     }
 
     /**
      * 删除
+     * RequestBody必须发送post
      */
     @RequestMapping("/delete")
-    fun delete(@RequestBody catIds: Array<Long?>): R {
-        categoryService!!.removeByIds(Arrays.asList(*catIds))
+    fun delete(@RequestBody catIds: Array<Long>): R {
+
+        //检查当前删除菜单是否被别的地方饮用,
+        categoryService.removeMeunByIds(listOf(*catIds))
+//        categoryService!!.removeByIds(Arrays.asList(*catIds))
         return R.ok()
     }
 }

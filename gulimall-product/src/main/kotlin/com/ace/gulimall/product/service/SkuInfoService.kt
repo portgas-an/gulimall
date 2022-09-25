@@ -2,6 +2,7 @@ package com.ace.gulimall.product.service
 
 import com.ace.gulimall.product.entity.SkuInfoEntity
 import com.baomidou.mybatisplus.extension.service.IService
+import com.ace.gulimall.common.utils.PageUtils
 
 /**
  * sku信息

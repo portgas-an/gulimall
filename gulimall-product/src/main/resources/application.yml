@@ -1,13 +1,23 @@
 spring:
   datasource:
     username: root
-    password: 123456
-    url: jdbc:mysql://localhost:3306/gulimall_pms
+    password: Ace951129.
+    url: jdbc:mysql://119.91.202.204:3306/gulimall_pms
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
+      config:
+        server-addr: portgas.cn:8848
+        group: dev
+        namespace: c68975f5-3774-445c-b191-ff709703b1dd
       discovery:
-        server-addr: 127.0.0.1:8848
+        ip: portgas.cn:8848
+        server-addr: portgas.cn:8848
+  config:
+    import:
+      - optional:nacos:datasource.yml?refreshEnabled=true # 开启动态刷新
+      - optional:nacos:mybatis.yml?refreshEnabled=true # 开启动态刷新
+      - optional:nacos:other.yml?refreshEnabled=true # 开启动态刷新
   application:
     name: gulimall-product
 
@@ -16,5 +26,10 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 server:
   port: 10000
+logging:
+  level:
+    com.ace.gulimall: debug

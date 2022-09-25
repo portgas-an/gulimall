@@ -1,6 +1,8 @@
 package com.ace.gulimall.product.entity
 
+import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
+import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
 
@@ -37,6 +39,7 @@ class CategoryEntity : Serializable {
     /**
      * 是否显示[0-不显示，1显示]
      */
+    @TableLogic(value = "1", delval = "0")
     var showStatus: Int? = null
 
     /**
@@ -58,6 +61,12 @@ class CategoryEntity : Serializable {
      * 商品数量
      */
     var productCount: Int? = null
+
+    /**
+     * 查出来的数据后设置的子列表
+     */
+    @TableField(exist = false)
+    var children:List<CategoryEntity>? = null
 
     companion object {
         private const val serialVersionUID = 1L

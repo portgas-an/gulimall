@@ -2,26 +2,41 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 119.91.202.204:8848
+        server-addr: portgas.cn:8848
         namespace: a97fa0e8-6034-4cfc-bf49-e44fe6ad149b
       discovery:
-        ip: 119.91.202.204
-        server-addr: 119.91.202.204:8848
+        ip: portgas.cn
+        server-addr: portgas.cn:8848
     gateway:
+      # 所有外部接口都带上api前缀
       routes:
-        - id: test_router
-          uri: https://www.baidu.com
+        - id: product_route
+          # 目标URL，lb代表从注册中心获取服务，lb是Load Balance的缩写
+          # 这里后面改lb
+          uri: http://192.168.10.102:10000/gulimall-product
+          # uri: http://192.168.9.81:10000/gulimall-product
           predicates:
-            - Query=url, baidu
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /$\{segment}
 
-        - id: qq_route
-          uri: http://127.0.0.1:8080/coupon/coupon/list
+        - id: third_party_route
+          # 目标URL，lb代表从注册中心获取服务，lb是Load Balance的缩写
+          # 这里后面改lb
+          uri: http://192.168.10.102:30000/gulimall-third-party
           predicates:
-            - Query=url, qq
-  #  config:
-#    import:
-#      - optional:nacos:gulimall-gateway.yml?refreshEnabled=true # 开启动态刷新
+            - Path=/api/thirdparty/**
+          filters:
+            - RewritePath=/api/thirdparty/(?<segment>.*), /$\{segment}
+
+        - id: admin_route
+          uri: http://192.168.10.102:10001/renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /renren-fast/$\{segment}
+
   application:
     name: gulimall-gateway
 server:
-  port: 88
+  port: 80

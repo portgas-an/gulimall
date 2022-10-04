@@ -10,11 +10,27 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl
 import org.springframework.stereotype.Service
 @Service("attrGroupService")
 class AttrGroupServiceImpl : ServiceImpl<AttrGroupDao, AttrGroupEntity>(), AttrGroupService {
-    override fun queryPage(params: Map<String?, Any?>?): PageUtils {
+    override fun queryPage(params: Map<String, Any>): PageUtils {
         val page = this.page(
             Query<AttrGroupEntity>().getPage(params),
             QueryWrapper()
         )
+        return PageUtils(page)
+    }
+
+    override fun queryPage(params: Map<String, Any>, catelogId: Long): PageUtils {
+        if (catelogId == 0L) {
+            return queryPage(params)
+        }
+        val key = params["key"] as String
+        // select * from pms_attr_group where catelog_Id = ? and (attr_group_id = key or attr_group_name like %key%)
+        val wrapper = QueryWrapper<AttrGroupEntity>().eq("catelog_Id", catelogId)
+        if (key.isNotEmpty()) {
+            wrapper.and {
+                it.eq("attr_group_id", key).or().like("attr_group_name", key)
+            }
+        }
+        val page = this.page(Query<AttrGroupEntity>().getPage(params), wrapper)
         return PageUtils(page)
     }
 }

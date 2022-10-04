@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableLogic
 import com.baomidou.mybatisplus.annotation.TableName
+import com.fasterxml.jackson.annotation.JsonInclude
 import java.io.Serializable
 
 /**
@@ -65,6 +66,7 @@ class CategoryEntity : Serializable {
     /**
      * 查出来的数据后设置的子列表
      */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @TableField(exist = false)
     var children:List<CategoryEntity>? = null
 

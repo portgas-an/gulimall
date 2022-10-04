@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.service.IService
  * @email ruobairuo@gmail.com
  * @date 2021-07-16 16:28:06
  */
-interface AttrGroupService : IService<AttrGroupEntity?> {
-    fun queryPage(params: Map<String?, Any?>?): PageUtils
+interface AttrGroupService : IService<AttrGroupEntity> {
+    fun queryPage(params: Map<String, Any>): PageUtils
+    fun queryPage(params: Map<String, Any>, catelogId: Long): PageUtils
 }

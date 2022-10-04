@@ -13,7 +13,7 @@ spring:
         - id: product_route
           # 目标URL，lb代表从注册中心获取服务，lb是Load Balance的缩写
           # 这里后面改lb
-          uri: http://192.168.10.102:10000/gulimall-product
+          uri: http://192.168.10.103:10000/gulimall-product
           # uri: http://192.168.9.81:10000/gulimall-product
           predicates:
             - Path=/api/product/**
@@ -23,14 +23,14 @@ spring:
         - id: third_party_route
           # 目标URL，lb代表从注册中心获取服务，lb是Load Balance的缩写
           # 这里后面改lb
-          uri: http://192.168.10.102:30000/gulimall-third-party
+          uri: http://192.168.10.103:30000/gulimall-third-party
           predicates:
             - Path=/api/thirdparty/**
           filters:
             - RewritePath=/api/thirdparty/(?<segment>.*), /$\{segment}
 
         - id: admin_route
-          uri: http://192.168.10.102:10001/renren-fast
+          uri: http://192.168.10.103:10001/renren-fast
           predicates:
             - Path=/api/**
           filters:

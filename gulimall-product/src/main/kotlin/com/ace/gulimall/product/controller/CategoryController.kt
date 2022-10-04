@@ -34,7 +34,7 @@ class CategoryController {
     @RequestMapping("/info/{catId}")
     fun info(@PathVariable("catId") catId: Long?): R {
         val category = categoryService.getById(catId)
-        return R.ok().put("category", category)
+        return R.ok().put("data", category)
     }
 
     /**
@@ -42,7 +42,7 @@ class CategoryController {
      */
     @RequestMapping("/save")
     fun save(@RequestBody category: CategoryEntity): R {
-        categoryService!!.save(category)
+        categoryService.save(category)
         return R.ok()
     }
 
@@ -50,8 +50,17 @@ class CategoryController {
      * 更新分类排序
      */
     @RequestMapping("/update/sort")
-    fun update(@RequestBody category: Array<CategoryEntity>): R {
+    fun updateSort(@RequestBody category: Array<CategoryEntity>): R {
         categoryService.updateBatchById(listOf(*category))
+        return R.ok()
+    }
+
+    /**
+     * 更新分类排序
+     */
+    @RequestMapping("/update")
+    fun update(@RequestBody category: CategoryEntity): R {
+        categoryService.updateCascade(category)
         return R.ok()
     }
 

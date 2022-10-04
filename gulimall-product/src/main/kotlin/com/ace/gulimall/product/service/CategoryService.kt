@@ -15,4 +15,13 @@ interface CategoryService : IService<CategoryEntity> {
     fun queryPage(params: Map<String?, Any?>?): PageUtils
     fun listWithTree(): List<CategoryEntity>?
     fun removeMeunByIds(listOf: List<Long>)
+
+    /**
+     * 找到attrGroupId完整路径
+     * [父/子/...]
+     * @param attrGroupId
+     * @return
+     */
+    fun findCategoryPath(attrGroupId: Long): LongArray
+    fun updateCascade(category: CategoryEntity)
 }

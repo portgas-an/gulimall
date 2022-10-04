@@ -1,5 +1,6 @@
 package com.ace.gulimall.product.entity
 
+import com.baomidou.mybatisplus.annotation.TableField
 import com.baomidou.mybatisplus.annotation.TableId
 import com.baomidou.mybatisplus.annotation.TableName
 import java.io.Serializable
@@ -43,6 +44,9 @@ class AttrGroupEntity : Serializable {
      * 所属分类id
      */
     var catelogId: Long? = null
+
+    @TableField(exist = false)
+    var categoryPath: LongArray? = null
 
     companion object {
         private const val serialVersionUID = 1L

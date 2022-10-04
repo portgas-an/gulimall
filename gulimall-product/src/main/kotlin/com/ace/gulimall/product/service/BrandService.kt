@@ -14,4 +14,5 @@ import com.baomidou.mybatisplus.extension.service.IService
  */
 interface BrandService : IService<BrandEntity?> {
     fun queryPage(params: Map<String?, Any?>?): PageUtils
+    fun updateDetail(brand: BrandEntity)
 }

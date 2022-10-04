@@ -12,33 +12,33 @@ import java.io.Serializable
  * @date 2021-07-16 16:28:06
  */
 @TableName("pms_category_brand_relation")
-class CategoryBrandRelationEntity : Serializable {
+data class CategoryBrandRelationEntity(
     /**
      *
      */
     @TableId
-    private val id: Long? = null
+    val id: Long? = null,
 
     /**
      * 品牌id
      */
-    var brandId: Long? = null
+    var brandId: Long? = null,
 
     /**
      * 分类id
      */
-    var catelogId: Long? = null
+    var catelogId: Long? = null,
 
     /**
      *
      */
-    var brandName: String? = null
+    var brandName: String? = null,
 
     /**
      *
      */
-    var catelogName: String? = null
-
+    var catelogName: String? = null,
+) : Serializable {
     companion object {
         private const val serialVersionUID = 1L
     }

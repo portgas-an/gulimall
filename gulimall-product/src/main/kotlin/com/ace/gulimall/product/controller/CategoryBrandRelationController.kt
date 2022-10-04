@@ -5,7 +5,6 @@ import com.ace.gulimall.product.entity.CategoryBrandRelationEntity
 import com.ace.gulimall.product.service.CategoryBrandRelationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 /**
  * 品牌分类关联
@@ -23,18 +22,20 @@ class CategoryBrandRelationController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    fun list(@RequestParam params: Map<String?, Any?>?): R {
-        val page = categoryBrandRelationService!!.queryPage(params)
-        return R.ok().put("page", page) ?: R.error()
+    @GetMapping("/catelog/list")
+    fun catelogList(@RequestParam("brandId") brandId: Long): R {
+        val data = categoryBrandRelationService.catelogList(brandId)
+        return R.ok().put("data", data)
     }
+
+
 
     /**
      * 信息
      */
     @RequestMapping("/info/{id}")
     fun info(@PathVariable("id") id: Long?): R {
-        val categoryBrandRelation = categoryBrandRelationService!!.getById(id)
+        val categoryBrandRelation = categoryBrandRelationService.getById(id)
         return R.ok().put("categoryBrandRelation", categoryBrandRelation) ?: R.error()
     }
 
@@ -43,7 +44,7 @@ class CategoryBrandRelationController {
      */
     @RequestMapping("/save")
     fun save(@RequestBody categoryBrandRelation: CategoryBrandRelationEntity): R {
-        categoryBrandRelationService!!.save(categoryBrandRelation)
+        categoryBrandRelationService.saveDetail(categoryBrandRelation)
         return R.ok()
     }
 
@@ -61,7 +62,7 @@ class CategoryBrandRelationController {
      */
     @RequestMapping("/delete")
     fun delete(@RequestBody ids: Array<Long?>): R {
-        categoryBrandRelationService!!.removeByIds(Arrays.asList(*ids))
+        categoryBrandRelationService.removeByIds(listOf(*ids))
         return R.ok()
     }
 }

@@ -3,6 +3,7 @@ package com.ace.gulimall.product.controller
 import com.ace.gulimall.common.utils.R
 import com.ace.gulimall.product.entity.AttrGroupEntity
 import com.ace.gulimall.product.service.AttrGroupService
+import com.ace.gulimall.product.service.CategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -20,22 +21,30 @@ class AttrGroupController {
     @Autowired
     private lateinit var attrGroupService: AttrGroupService
 
+    @Autowired
+    private lateinit var categoryService: CategoryService
+
     /**
      * 列表
      */
-    @RequestMapping("/list")
-    fun list(@RequestParam params: Map<String?, Any?>?): R {
-        val page = attrGroupService!!.queryPage(params)
-        return R.ok().put("page", page) ?: R.error()
+    @RequestMapping("/list/{catelogId}")
+    fun list(@RequestParam params: Map<String, Any>, @PathVariable("catelogId") catelogId: Long): R {
+//        val page = attrGroupService.queryPage(params)
+        val page = attrGroupService.queryPage(params, catelogId)
+
+        return R.ok().put("page", page)
     }
 
     /**
      * 信息
      */
     @RequestMapping("/info/{attrGroupId}")
-    fun info(@PathVariable("attrGroupId") attrGroupId: Long?): R {
-        val attrGroup = attrGroupService!!.getById(attrGroupId)
-        return R.ok().put("attrGroup", attrGroup) ?: R.error()
+    fun info(@PathVariable("attrGroupId") attrGroupId: Long): R {
+        val attrGroup = attrGroupService.getById(attrGroupId)
+
+        val path = categoryService.findCategoryPath(attrGroup.catelogId ?: 0)
+        attrGroup.categoryPath = path
+        return R.ok().put("attrGroup", attrGroup)
     }
 
     /**

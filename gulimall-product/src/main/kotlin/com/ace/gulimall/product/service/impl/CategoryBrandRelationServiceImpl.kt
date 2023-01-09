@@ -44,7 +44,7 @@ class CategoryBrandRelationServiceImpl : ServiceImpl<CategoryBrandRelationDao, C
         val brandEntity = brandDao.selectById(categoryBrandRelation.brandId)
         val categoryEntity = categoryDao.selectById(categoryBrandRelation.catelogId)
         categoryBrandRelation.brandName = brandEntity.name
-        categoryBrandRelation.catelogName = categoryEntity.name
+        categoryBrandRelation.catelogName = categoryEntity?.name
         this.save(categoryBrandRelation)
     }
 

@@ -58,7 +58,7 @@ class AttrServiceImpl : ServiceImpl<AttrDao, AttrEntity>(), AttrService {
             }
             val key = params["key"] as String?
             if (key?.isNotEmpty() == true) {
-                and { it.eq("attr_id", key).or().like("attr _name", key) }
+                and { it.eq("attr_id", key).or().like("attr_name", key) }
             }
         })
         val pageUtils = PageUtils(page)

@@ -1,5 +1,6 @@
 package com.ace.gulimall.ware.service
 
+import com.ace.gulimall.common.utils.PageUtils
 import com.ace.gulimall.ware.entity.PurchaseDetailEntity
 import com.baomidou.mybatisplus.extension.service.IService
 

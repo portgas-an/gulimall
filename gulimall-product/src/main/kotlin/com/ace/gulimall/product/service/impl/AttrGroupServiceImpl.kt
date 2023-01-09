@@ -19,18 +19,20 @@ class AttrGroupServiceImpl : ServiceImpl<AttrGroupDao, AttrGroupEntity>(), AttrG
     }
 
     override fun queryPage(params: Map<String, Any>, catelogId: Long): PageUtils {
-        if (catelogId == 0L) {
-            return queryPage(params)
-        }
-        val key = params["key"] as String
+        var key = params["key"] as String?
         // select * from pms_attr_group where catelog_Id = ? and (attr_group_id = key or attr_group_name like %key%)
-        val wrapper = QueryWrapper<AttrGroupEntity>().eq("catelog_Id", catelogId)
-        if (key.isNotEmpty()) {
+        val wrapper = QueryWrapper<AttrGroupEntity>()
+        if (key?.isNotEmpty() == true) {
             wrapper.and {
                 it.eq("attr_group_id", key).or().like("attr_group_name", key)
             }
         }
-        val page = this.page(Query<AttrGroupEntity>().getPage(params), wrapper)
+        val page = if (catelogId == 0L) {
+            this.page(Query<AttrGroupEntity>().getPage(params), wrapper)
+        } else {
+            wrapper.eq("catelog_Id", catelogId)
+            this.page(Query<AttrGroupEntity>().getPage(params), wrapper)
+        }
         return PageUtils(page)
     }
 }

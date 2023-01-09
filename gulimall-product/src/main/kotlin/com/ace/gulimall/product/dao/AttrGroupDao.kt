@@ -12,4 +12,4 @@ import org.apache.ibatis.annotations.Mapper
  * @date 2021-07-16 16:28:06
  */
 @Mapper
-interface AttrGroupDao : BaseMapper<AttrGroupEntity>
+interface AttrGroupDao : BaseMapper<AttrGroupEntity?>

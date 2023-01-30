@@ -1,7 +1,6 @@
 package com.ace.gulimall.product.controller
 
 import com.ace.gulimall.common.utils.R
-import com.ace.gulimall.product.entity.AttrEntity
 import com.ace.gulimall.product.service.AttrService
 import com.ace.gulimall.product.vo.AttrVo
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,9 +21,13 @@ class AttrController {
 
 
     //product/base/list/{}
-    @RequestMapping("/base/list/{catelogId}")
-    fun baseAttrList(@RequestParam params: Map<String?, Any?>, @PathVariable("catelogId") catelog: Long?): R {
-        val page = attrService.queryBaseAttrPage(params, catelog)
+    @RequestMapping("/{attrType}/list/{catelogId}")
+    fun baseAttrList(
+        @RequestParam params: Map<String?, Any?>,
+        @PathVariable("catelogId") catelog: Long?,
+        @PathVariable("attrType") type: String,
+    ): R {
+        val page = attrService.queryBaseAttrPage(params, catelog, type)
         return R.ok().put("page", page)
     }
 
@@ -42,8 +45,8 @@ class AttrController {
      */
     @RequestMapping("/info/{attrId}")
     fun info(@PathVariable("attrId") attrId: Long?): R {
-        val attr = attrService.getById(attrId)
-        return R.ok().put("attr", attr) ?: R.error()
+        val response = attrService.getAttrInfo(attrId)
+        return R.ok().put("attr", response)
     }
 
     /**
@@ -59,8 +62,8 @@ class AttrController {
      * 修改
      */
     @RequestMapping("/update")
-    fun update(@RequestBody attr: AttrEntity): R {
-        attrService.updateById(attr)
+    fun update(@RequestBody attr: AttrVo): R {
+        attrService.updateAttr(attr)
         return R.ok()
     }
 

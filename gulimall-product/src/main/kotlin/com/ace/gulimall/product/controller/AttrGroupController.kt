@@ -1,8 +1,11 @@
 package com.ace.gulimall.product.controller
 
 import com.ace.gulimall.common.utils.R
+import com.ace.gulimall.product.entity.AttrAttrgroupRelationEntity
+import com.ace.gulimall.product.entity.AttrEntity
 import com.ace.gulimall.product.entity.AttrGroupEntity
 import com.ace.gulimall.product.service.AttrGroupService
+import com.ace.gulimall.product.service.AttrService
 import com.ace.gulimall.product.service.CategoryService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -24,6 +27,9 @@ class AttrGroupController {
     @Autowired
     private lateinit var categoryService: CategoryService
 
+    @Autowired
+    private lateinit var attrService: AttrService
+
     /**
      * 列表
      */
@@ -33,6 +39,12 @@ class AttrGroupController {
         val page = attrGroupService.queryPage(params, catelogId)
 
         return R.ok().put("page", page)
+    }
+
+    @RequestMapping("/{attrGroupId}/attr/relation")
+    fun attrRelation(@PathVariable("attrGroupId") attrGroupId: Long): R {
+        val entities: List<AttrEntity> = attrService.getRelationAttr(attrGroupId)
+        return R.ok().put("data", entities)
     }
 
     /**
@@ -55,6 +67,13 @@ class AttrGroupController {
         attrGroupService!!.save(attrGroup)
         return R.ok()
     }
+
+    @RequestMapping("/attr/relation/delete")
+    fun deleteRelation(@RequestBody vos : Array<AttrAttrgroupRelationEntity>): R {
+        attrService.deleteRelation(vos)
+        return R.ok()
+    }
+
 
     /**
      * 修改

@@ -19,9 +19,9 @@ interface CategoryService : IService<CategoryEntity> {
     /**
      * 找到attrGroupId完整路径
      * [父/子/...]
-     * @param attrGroupId
+     * @param catelogId
      * @return
      */
-    fun findCategoryPath(attrGroupId: Long): LongArray
+    fun findCategoryPath(catelogId: Long): LongArray
     fun updateCascade(category: CategoryEntity)
 }

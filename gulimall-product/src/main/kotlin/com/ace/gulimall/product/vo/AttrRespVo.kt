@@ -57,4 +57,6 @@ data class AttrRespVo(
      * 所属分组名称
      */
     var groupName: String? = null,
+
+    var catelogPath : LongArray = longArrayOf(),
 )

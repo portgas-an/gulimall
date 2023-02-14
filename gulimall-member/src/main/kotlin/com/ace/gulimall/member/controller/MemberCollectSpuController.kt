@@ -25,7 +25,7 @@ class MemberCollectSpuController {
      */
     @RequestMapping("/list")
     fun list(@RequestParam params: Map<String?, Any?>?): R {
-        val page: PageUtils = memberCollectSpuService.queryPage(params)
+        val page = memberCollectSpuService.queryPage(params)
         return R.ok().put("page", page) ?: R.error()
     }
 

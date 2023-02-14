@@ -1,5 +1,7 @@
 package com.ace.gulimall.member.service.impl
 
+import com.ace.gulimall.common.utils.PageUtils
+import com.ace.gulimall.common.utils.Query
 import com.ace.gulimall.member.dao.MemberCollectSubjectDao
 import com.ace.gulimall.member.entity.MemberCollectSubjectEntity
 import com.ace.gulimall.member.service.MemberCollectSubjectService

@@ -25,7 +25,7 @@ class IntegrationChangeHistoryController {
      */
     @RequestMapping("/list")
     fun list(@RequestParam params: Map<String?, Any?>?): R {
-        val page: PageUtils = integrationChangeHistoryService.queryPage(params)
+        val page = integrationChangeHistoryService.queryPage(params)
         return R.ok().put("page", page) ?: R.error()
     }
 

@@ -22,4 +22,5 @@ interface AttrService : IService<AttrEntity> {
     fun updateAttr(attr: AttrVo)
     fun getRelationAttr(attrGroupId: Long): List<AttrEntity>
     fun deleteRelation(vos: Array<AttrAttrgroupRelationEntity>)
+    fun getNoRelationAttr(params: Map<String, Any>, attrGroupId: Long): PageUtils
 }

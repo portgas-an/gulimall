@@ -20,6 +20,16 @@ spring:
           filters:
             - RewritePath=/api/?(?<segment>.*), /$\{segment}
 
+        - id: member_route
+          # 目标URL，lb代表从注册中心获取服务，lb是Load Balance的缩写
+          # 这里后面改lb
+          uri: http://192.168.10.103:20000/gulimall-member
+          # uri: http://192.168.9.81:10000/gulimall-product
+          predicates:
+            - Path=/api/member/**
+          filters:
+            - RewritePath=/api/?(?<segment>.*), /$\{segment}
+
         - id: third_party_route
           # 目标URL，lb代表从注册中心获取服务，lb是Load Balance的缩写
           # 这里后面改lb

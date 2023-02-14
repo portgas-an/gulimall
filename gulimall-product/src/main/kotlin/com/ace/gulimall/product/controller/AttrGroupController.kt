@@ -1,9 +1,11 @@
 package com.ace.gulimall.product.controller
 
+import com.ace.gulimall.common.utils.PageUtils
 import com.ace.gulimall.common.utils.R
 import com.ace.gulimall.product.entity.AttrAttrgroupRelationEntity
 import com.ace.gulimall.product.entity.AttrEntity
 import com.ace.gulimall.product.entity.AttrGroupEntity
+import com.ace.gulimall.product.service.AttrAttrgroupRelationService
 import com.ace.gulimall.product.service.AttrGroupService
 import com.ace.gulimall.product.service.AttrService
 import com.ace.gulimall.product.service.CategoryService
@@ -30,6 +32,9 @@ class AttrGroupController {
     @Autowired
     private lateinit var attrService: AttrService
 
+    @Autowired
+    private lateinit var relationService: AttrAttrgroupRelationService
+
     /**
      * 列表
      */
@@ -45,6 +50,18 @@ class AttrGroupController {
     fun attrRelation(@PathVariable("attrGroupId") attrGroupId: Long): R {
         val entities: List<AttrEntity> = attrService.getRelationAttr(attrGroupId)
         return R.ok().put("data", entities)
+    }
+
+    @RequestMapping("/{attrGroupId}/noattr/relation")
+    fun noAttrRelation(@PathVariable("attrGroupId") attrGroupId: Long, @RequestParam params: Map<String, Any>): R {
+        val page: PageUtils = attrService.getNoRelationAttr(params, attrGroupId)
+        return R.ok().put("page", page)
+    }
+
+    @RequestMapping("/attr/relation")
+    fun addRelation(@RequestBody vos : List<AttrAttrgroupRelationEntity>) : R{
+        relationService.saveBatch(vos)
+        return R.ok()
     }
 
     /**

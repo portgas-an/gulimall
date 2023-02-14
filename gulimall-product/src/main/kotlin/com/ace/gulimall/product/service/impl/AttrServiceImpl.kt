@@ -9,6 +9,7 @@ import com.ace.gulimall.product.dao.AttrGroupDao
 import com.ace.gulimall.product.dao.CategoryDao
 import com.ace.gulimall.product.entity.AttrAttrgroupRelationEntity
 import com.ace.gulimall.product.entity.AttrEntity
+import com.ace.gulimall.product.entity.AttrGroupEntity
 import com.ace.gulimall.product.service.AttrService
 import com.ace.gulimall.product.service.CategoryService
 import com.ace.gulimall.product.vo.AttrRespVo
@@ -78,7 +79,7 @@ class AttrServiceImpl : ServiceImpl<AttrDao, AttrEntity>(), AttrService {
                 val attrAttrgroupRelationEntity =
                     relationDao.selectOne(QueryWrapper<AttrAttrgroupRelationEntity>().eq("attr_id", it.attrId))
                 val attrGroupEntity = attrGroupDao.selectById(attrAttrgroupRelationEntity?.attrGroupId)
-                attrGroupEntity?.attrGroupName?.let { name ->
+                attrGroupEntity?. attrGroupName?.let { name ->
                     attrRespVo.groupName = name
                 }
             }
@@ -148,6 +149,43 @@ class AttrServiceImpl : ServiceImpl<AttrDao, AttrEntity>(), AttrService {
         val attrIds = entities.map {
             it?.attrId
         }
+        if (attrIds.isEmpty()){
+            return emptyList()
+        }
         return this.listByIds(attrIds)
+    }
+
+    /**
+     * 获取当前分组没有关联的所有属性
+     */
+    override fun getNoRelationAttr(params: Map<String, Any>, attrGroupId: Long): PageUtils {
+        //当前分组只能关联自己所属的分类里面的所有属性
+        val attrGroupEntity = attrGroupDao.selectById(attrGroupId)
+        val catelogId = attrGroupEntity?.catelogId
+        //当前分组只能关联别的分组没有引用的属性
+        //1.当前分类下的其他分组
+        val group = attrGroupDao.selectList(
+            QueryWrapper<AttrGroupEntity>().eq("catelog_id", catelogId)
+        )
+        val groupIds = group.map {
+            it?.attrGroupId
+        }
+        //2.这些分组关联的属性
+        val groupId = relationDao.selectList(QueryWrapper<AttrAttrgroupRelationEntity>().`in`("attr_group_id", groupIds))
+        //3.从当前分类的所有属性中移除这些属性
+        val attrIds = groupId.map {
+            it?.attrId
+        }
+        val wrapper = QueryWrapper<AttrEntity>().eq("catelog_id", catelogId)
+        if (!attrIds.isNullOrEmpty()) {
+            wrapper.notIn("attr_id", attrIds)
+        }
+        val key = params["key"] as String?
+        if (!key.isNullOrEmpty()) {
+            wrapper.and {
+                it.eq("attr_id", key).or().like("attr_name", key)
+            }
+        }
+        return PageUtils(page(Query<AttrEntity>().getPage(params), wrapper))
     }
 }
